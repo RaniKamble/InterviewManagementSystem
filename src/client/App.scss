@@ -1,0 +1,29 @@
+.App {
+    max-width: 1200px;
+    margin: auto;
+    background-color: lightblue;
+    padding: 20px;
+    .App-header {
+        display:flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+.app-title {
+    text-align: center;
+    text-transform: uppercase;
+    margin: 20px 0;
+}
+.search-container {
+    margin: 40px 0;
+    display:flex;
+    label {
+        flex-basis: 200px;
+        display: flex;
+        align-items: center;
+    }
+    .form-control {
+        height: 46px;
+    }
+}
