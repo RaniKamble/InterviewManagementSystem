@@ -18,10 +18,10 @@ export default class CandidateInfoList extends Component {
         handleUpdate(candidateID, candidate);
     }
 
-    handleView(e, candidateID, candidate) {
+    handleView(e, candidate) {
         const {onModalView} = this.props;
         this.modalStatus = true;
-        onModalView(this.modalStatus);
+        onModalView(this.modalStatus, candidate);
     }
 
     handleEvalution(e, candidateID, candidate) {
@@ -35,7 +35,8 @@ export default class CandidateInfoList extends Component {
 
         if(searchKey) {
             candidateNodes = data.filter((candidate, index) => {
-                return candidate.firstname.toLowerCase().indexOf(searchKey.toLowerCase()) > -1 || candidate.lastname.toLowerCase().indexOf(searchKey.toLowerCase()) > -1;
+                const fullName = candidate.firstname  + " " +  candidate.lastname;
+                return candidate.firstname.toLowerCase().indexOf(searchKey.toLowerCase()) > -1 || candidate.lastname.toLowerCase().indexOf(searchKey.toLowerCase()) > -1 || candidate.skills.toLowerCase().indexOf(searchKey.toLowerCase()) > -1 || fullName.toLowerCase().indexOf(searchKey.toLowerCase()) > -1;
             })
         }   
 
@@ -49,14 +50,17 @@ export default class CandidateInfoList extends Component {
                                 <p>Name: {candidate.firstname} {candidate.lastname}</p>
                                 <p>Skills: {candidate.skills}</p>
                             </div>
-                            <div>
-                                {/* <button className="btn-update" onClick={(e)=>this.handleUpdate(e, candidateID)}>Update</button> */}
-                                <button className="btn-view" onClick={(e)=>this.handleView(e, candidateID)}>View</button>
+                            <div className="evaluation-wrapper" >
+                                <Evaluation/> 
+                                <div className="file"><a href=""> Resume </a></div>                            
+                            </div>
+                              <div>
+                                <button className="btn-view" onClick={(e)=>this.handleView(e, candidate)}>View</button>
                                 <button className="btn-delete" onClick={(e)=>this.handleDelete(e, candidateID,candidate)}>delete</button>
                             </div>
-                            <div>
+                            {/* <div>
                                 <button className="btn-evaluate btn btn-lg btn-primary"  onClick={this.handleEvalution}>Start Evalution Process</button>
-                            </div>
+                            </div> */}
                         </div>                    
                 </div>                
                 

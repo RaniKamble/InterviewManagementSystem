@@ -25,67 +25,79 @@ router.get('/newIAForm', function(req, res, next){
 
 // Get Single Task
 router.get('/candidateInfo/:id', function(req, res, next){
-    db.candinateInformationTables.findOne({_id: mongojs.ObjectId(req.params.id)}, function(err, candinate){
+    db.candidateInformationTables.findOne({_id: mongojs.ObjectId(req.params.id)}, function(err, candidate){
         if(err){
             res.send(err);
         }
-        res.json(candinate);
+        res.json(candidate);
     });
 });
 
-//Save Candinate Info
+//Save Candidate Info
 router.post('/candidateInfo/newCandidate', function(req, res, next){
-    var candinate = req.body;
+    var candidate = req.body;
     //console.log(req.body);
-    if(!candinate.firstname || !(candinate.lastname + '')){
+    if(!candidate.firstname || !(candidate.lastname + '')){
         res.status(400);
         res.json({
             "error": "Bad Data"
         });
     } else {
-        db.candinateInformationTables.save(candinate, function(err, candinate){
+        db.candidateInformationTables.save(candidate, function(err, candidate){
             if(err){
                 res.send(err);
             }
-            res.json(candinate);
+            res.json(candidate);
         });
     }
 });
 
-// Delete Candinate Info
+// Delete Candidate Info
 router.delete('/candidateInfo/:id', function(req, res, next){
-    db.candinateInformationTables.remove({_id: mongojs.ObjectId(req.params.id)}, function(err, candinate){
+    db.candidateInformationTables.remove({_id: mongojs.ObjectId(req.params.id)}, function(err, candidate){
         if(err){
             res.send(err);
         }
-        res.json(candinate);
+        res.json(candidate);
     });
 });
 
-// Update Candinate Info
+// Update Candidate Info
 router.put('/candidateInfo/:id', function(req, res, next){
-    var candinate = req.body;
-    var updcandinateInfo = {};
+    var candidate = req.body;
+    var updcandidateInfo = {};
 
-    if(candinate.name){
-        updcandinateInfo.name = candinate.name;
+    if(candidate.firstname){
+        updcandidateInfo.firstname = candidate.firstname;
     }
 
-    if(candinate.address){
-        updcandinateInfo.address = candinate.address;
+    if(candidate.lastname){
+        updcandidateInfo.lastname = candidate.lastname;
     }
-
-    if(!updcandinateInfo){
+    if(candidate.skills){
+        updcandidateInfo.skills = candidate.skills;
+    }
+    if(candidate.email){
+        updcandidateInfo.email = candidate.email;
+    }
+    if(candidate.address){
+        updcandidateInfo.phone = candidate.phone;
+    }
+    if(candidate.city){
+        updcandidateInfo.phone = candidate.city;
+    }
+    
+    if(!updcandidateInfo){
         res.status(400);
         res.json({
             "error":"Bad Data"
         });
     } else {
-        db.candinateInformationTables.update({_id: mongojs.ObjectId(req.params.id)},updcandinateInfo, {}, function(err, candinate){
+        db.candidateInformationTables.update({_id: mongojs.ObjectId(req.params.id)},updcandidateInfo, {}, function(err, candidate){
             if(err){
                 res.send(err);
             }
-            res.json(candinate);
+            res.json(candidate);
         });
     }
 });

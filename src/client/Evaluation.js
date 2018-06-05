@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Evaluation.scss';
 import Details from './Details';
 import Note from './Note';
 import Expertise from './Expertise';

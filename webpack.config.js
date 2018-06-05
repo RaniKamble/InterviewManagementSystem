@@ -24,9 +24,12 @@ module.exports = {
     ]
   },
   devServer: {
-    port: 3000,
+    port:4000,
     proxy: {
-      '/candidateInfo': 'http://localhost:2000'
+      '/candidateInfo': {
+        target: 'http://localhost:2000/candidateInfo',
+        secure: false
+      }
     }
   },
   plugins: [
